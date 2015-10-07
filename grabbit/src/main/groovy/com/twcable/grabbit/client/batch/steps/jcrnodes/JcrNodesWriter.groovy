@@ -58,6 +58,8 @@ class JcrNodesWriter implements ItemWriter<ProtoNode>, ItemWriteListener {
             }
         } catch(RepositoryException e) {
             log.error "Exception while save() / refresh() of current chunk.", e
+            //Discard pending changes
+            theSession().refresh(false)
         }
     }
 
