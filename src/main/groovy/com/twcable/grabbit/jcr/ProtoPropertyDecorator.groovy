@@ -85,17 +85,22 @@ class ProtoPropertyDecorator {
 
 
     boolean isMultiple() {
-        return hasValues()
+        return valuesCount > 1
+    }
+
+
+    ProtoValue getValue() {
+        innerProtoProperty.valuesList.first()
     }
 
 
     private Value getPropertyValue() throws ValueFormatException {
-        getJCRValueFromProtoValue(innerProtoProperty.getValue())
+        getJCRValueFromProtoValue(getValue())
     }
 
 
     private Value[] getPropertyValues() throws ValueFormatException {
-        return innerProtoProperty.values.valueList.collect { ProtoValue protoValue -> getJCRValueFromProtoValue(protoValue) } as Value[]
+        return innerProtoProperty.valuesList.collect { ProtoValue protoValue -> getJCRValueFromProtoValue(protoValue) } as Value[]
     }
 
 

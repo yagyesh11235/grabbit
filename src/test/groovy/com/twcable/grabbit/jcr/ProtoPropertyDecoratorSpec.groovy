@@ -20,7 +20,6 @@ import com.day.cq.commons.jcr.JcrConstants
 import com.google.protobuf.ByteString
 import com.twcable.grabbit.proto.NodeProtos.Property as PropertyProto
 import com.twcable.grabbit.proto.NodeProtos.Value as ProtoValue
-import com.twcable.grabbit.proto.NodeProtos.Values as ProtoValues
 import org.apache.jackrabbit.value.BinaryValue
 import org.apache.jackrabbit.value.DateValue
 import org.apache.jackrabbit.value.StringValue
@@ -41,7 +40,7 @@ class ProtoPropertyDecoratorSpec extends Specification {
         PropertyProto someProperty = PropertyProto.newBuilder()
                                         .setName(refusedType)
                                         .setType(PropertyType.STRING)
-                                        .setValue(
+                                        .addValues(
                                             ProtoValue.newBuilder()
                                                 .setStringValue("somevalue")
                                                 .build()
@@ -67,7 +66,7 @@ class ProtoPropertyDecoratorSpec extends Specification {
         PropertyProto someProperty = PropertyProto.newBuilder()
                                             .setName("property")
                                             .setType(PropertyType.STRING)
-                                            .setValue(
+                                            .addValues(
                                                 ProtoValue.newBuilder()
                                                     .setStringValue("somevalue")
                                                     .build()
@@ -90,15 +89,11 @@ class ProtoPropertyDecoratorSpec extends Specification {
         PropertyProto someMultiProperty = PropertyProto.newBuilder()
                                               .setName("property")
                                               .setType(PropertyType.STRING)
-                                              .setValues(
-                                                  ProtoValues.newBuilder()
-                                                      .addAllValue(
-                                                          [
-                                                              ProtoValue.newBuilder().setStringValue("value1").build(),
-                                                              ProtoValue.newBuilder().setStringValue("value2").build()
-                                                          ]
-                                                      )
-                                                      .build()
+                                              .addAllValues(
+                                                  [
+                                                      ProtoValue.newBuilder().setStringValue("value1").build(),
+                                                      ProtoValue.newBuilder().setStringValue("value2").build()
+                                                  ]
                                               )
                                               .build()
 
@@ -134,7 +129,7 @@ class ProtoPropertyDecoratorSpec extends Specification {
         PropertyProto someProperty = PropertyProto.newBuilder()
                                         .setName("property")
                                         .setType(PropertyType.STRING)
-                                        .setValue(
+                                        .addValues(
                                             ProtoValue.newBuilder()
                                                 .setStringValue("somevalue")
                                                 .build()
@@ -173,15 +168,11 @@ class ProtoPropertyDecoratorSpec extends Specification {
         PropertyProto someMultiProperty = PropertyProto.newBuilder()
                                                 .setName("property")
                                                 .setType(PropertyType.STRING)
-                                                .setValues(
-                                                    ProtoValues.newBuilder()
-                                                        .addAllValue(
-                                                            [
-                                                                ProtoValue.newBuilder().setStringValue("value1").build(),
-                                                                ProtoValue.newBuilder().setStringValue("value2").build()
-                                                            ]
-                                                        )
-                                                        .build()
+                                                .addAllValues(
+                                                    [
+                                                        ProtoValue.newBuilder().setStringValue("value1").build(),
+                                                        ProtoValue.newBuilder().setStringValue("value2").build()
+                                                    ]
                                                 )
                                                 .build()
 
@@ -203,7 +194,7 @@ class ProtoPropertyDecoratorSpec extends Specification {
         PropertyProto someProperty = PropertyProto.newBuilder()
                                         .setName(JcrConstants.JCR_DATA)
                                         .setType(PropertyType.BINARY)
-                                        .setValue(
+                                        .addValues(
                                             ProtoValue.newBuilder()
                                                 .setBytesValue(ByteString.copyFrom("somebytes".bytes))
                                             .build()
@@ -228,7 +219,7 @@ class ProtoPropertyDecoratorSpec extends Specification {
         PropertyProto someProperty = PropertyProto.newBuilder()
                                         .setName("somedate")
                                         .setType(PropertyType.DATE)
-                                        .setValue(
+                                        .addValues(
                                             ProtoValue.newBuilder()
                                                 .setStringValue("2015-07-06")
                                                 .build()

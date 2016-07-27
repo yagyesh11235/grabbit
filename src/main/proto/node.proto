@@ -5,30 +5,19 @@ option java_outer_classname = "NodeProtos";
 
 message Node {
     required string name = 1;
-    required Properties properties = 2;
+    repeated Property properties = 2;
     repeated Node mandatoryChildNode = 3;
-}
-
-message Properties {
-    repeated Property property = 1;
 }
 
 message Property {
     required string name = 1;
-    required int32 type = 2;
-    //essentially a C-Style Union
-    oneof value_union {
-      Value value = 3;
-      Values values = 4;
-    }
-}
-
-message Values {
-    repeated Value value = 1;
+    required uint32 type = 2;
+    repeated Value values = 3;
 }
 
 message Value {
-    oneof encoding {
+    //Essentially a C-Style union
+    oneof type {
       string stringValue = 1;
       bytes bytesValue = 2;
     }
