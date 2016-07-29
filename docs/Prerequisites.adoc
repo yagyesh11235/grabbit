@@ -3,7 +3,7 @@
 === Installing Protocol Buffers Compiler
 
 ==== For Windows
-For Windows, the easiest way to install the compiler is to install the binary from https://github.com/google/protobuf/releases/download/v2.6.1/protoc-2.6.1-win32.zip and then set the `/path/to/protoc/parent` on your PATH variable.
+The easiest way to install the compiler is to install the binary from https://github.com/google/protobuf/releases/download/v2.6.1/protoc-2.6.1-win32.zip and then set the `/path/to/protoc/parent` on your PATH variable.
 
 ==== For Macs
 
