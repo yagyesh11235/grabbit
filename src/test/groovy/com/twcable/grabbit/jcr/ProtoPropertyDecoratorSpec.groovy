@@ -104,6 +104,22 @@ class ProtoPropertyDecoratorSpec extends Specification {
         1 * mockNode.setProperty("property", [new StringValue("value1"), new StringValue("value2")] as Value[], PropertyType.STRING)
     }
 
+    def "A multi-value property field with no values, can be written correctly to a node that expects a multi-value property"() {
+        given:
+        final mockNode = Mock(Node)
+
+        when:
+        PropertyProto someMultiProperty = PropertyProto.newBuilder()
+                                            .setName("property")
+                                            .setType(PropertyType.STRING).build()
+
+        final propertyDecorator = new ProtoPropertyDecorator(someMultiProperty)
+        propertyDecorator.writeToNode(mockNode)
+
+        then:
+        1 * mockNode.setProperty("property", [] as Value[], PropertyType.STRING)
+    }
+
 
     def "A single-value property that is attempted to be written to a multi-value property can recover, and be written"() {
         when:
